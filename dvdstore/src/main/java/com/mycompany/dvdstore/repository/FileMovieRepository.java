@@ -7,9 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoLiveMovieRepository {
+public class FileMovieRepository implements MovieRepositoryInterface {
 
     private static List<Movie> movies = new ArrayList<>();
+    private MovieRepositoryInterface movieRepositoryInterface;
+
+    public MovieRepositoryInterface getMovieRepositoryInterface() {
+        return movieRepositoryInterface;
+    }
+
+    public void setMovieRepositoryInterface(MovieRepositoryInterface movieRepositoryInterface) {
+        this.movieRepositoryInterface = movieRepositoryInterface;
+    }
 
     public void addMovie(Movie movie){
         FileWriter writer;
@@ -22,5 +31,4 @@ public class GoLiveMovieRepository {
             e.printStackTrace();
         }
     }
-
 }
