@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="defaultMovieService" class="com.mycompany.dvdstore.service.DefaultMovieService">
-        <property name="movieRepositoryInterface" ref="fileMovieRepository"/>
-    </bean>
-    <bean class="com.mycompany.dvdstore.controller.MovieController">
-        <property name="movieService" ref="defaultMovieService"/>
-    </bean>
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:application.properties"/>
+
+    <bean id="defaultMovieService" class="com.mycompany.dvdstore.service.DefaultMovieService"/>
+    <bean class="com.mycompany.dvdstore.controller.MovieController"/>
     <bean id="fileMovieRepository" class="com.mycompany.dvdstore.repository.FileMovieRepository"/>
     <!--bean id="fileMovieRepository" class="com.mycompany.dvdstore.repository.MemoryMovieRepository"/-->
 

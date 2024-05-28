@@ -1,6 +1,7 @@
 package com.mycompany.dvdstore.repository;
 
 import com.mycompany.dvdstore.entity.Movie;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 public class MemoryMovieRepository implements MovieRepositoryInterface {
 
     private static List<Movie> movies = new ArrayList<>();
+
+    @Autowired
     private MovieRepositoryInterface movieRepository;
 
     public MovieRepositoryInterface getMovieRepository() {
