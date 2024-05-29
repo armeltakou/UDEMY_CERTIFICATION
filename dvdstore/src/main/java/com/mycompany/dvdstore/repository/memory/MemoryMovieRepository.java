@@ -1,6 +1,7 @@
-package com.mycompany.dvdstore.repository;
+package com.mycompany.dvdstore.repository.memory;
 
 import com.mycompany.dvdstore.entity.Movie;
+import com.mycompany.dvdstore.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
