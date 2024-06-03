@@ -12,14 +12,20 @@
         </caption>
         <thead>
         <tr>
-            <th scope="col">Titre</th>
-            <th scope="col">Genre</th>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Genre</th>
+            <th>Description</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="movie: ${movies}">
-            <td th:text="${movie.titre}">titre</td>
+            <td th:text="${movie.id}">Id</td>
+            <td>
+                <a th:href="@{/movie/{id}(id=${movie.id})}" th:text="${movie.titre}"/>
+            </td>
             <td th:text="${movie.genre}">genre</td>
+            <td th:text="${movie.description}">description</td>
         </tr>
         </tbody>
     </table>
