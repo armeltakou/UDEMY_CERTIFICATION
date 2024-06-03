@@ -23,12 +23,16 @@ public class MovieController implements MovieControllerInterface {
     }
 
     public void addMovie(){
-        System.out.println("Veuillez entrer le Titre du film : ");
         Scanner scan = new Scanner(System.in);
+        System.out.println("Veuillez entrer l'identifiant du film : ");
+        long id = scan.nextLong();
+        System.out.println("Veuillez entrer le Titre du film : ");
         String titre = scan.nextLine();
         System.out.println("Veuillez entrer le Genre du film : ");
         String genre = scan.nextLine();
-        Movie movie = new Movie(titre, genre);
+        System.out.println("Veuillez entrer la Description du film : ");
+        String description = scan.nextLine();
+        Movie movie = new Movie(id, titre, genre, description);
         //DefaultMovieService movieService = new DefaultMovieService();
         //movieService.registerMovie(movie);
         movieService.registerGoLiveMovie(movie);

@@ -19,10 +19,6 @@ public class DefaultMovieService implements MovieServiceInterface {
         return movieRepositoryInterface;
     }
 
-    /*public void setMovieRepositoryInterface(MovieRepositoryInterface movieRepositoryInterface) {
-        this.movieRepositoryInterface = movieRepositoryInterface;
-    }*/
-
     public void registerMovie(Movie movie){
         movieRepositoryInterface.addMovie(movie);
     }
@@ -35,4 +31,7 @@ public class DefaultMovieService implements MovieServiceInterface {
     public List<Movie> getMovieList() {
         return movieRepositoryInterface.list();
     }
+
+    @Override
+    public Movie getMovieById(long id) {return movieRepositoryInterface.getById(id);}
 }
