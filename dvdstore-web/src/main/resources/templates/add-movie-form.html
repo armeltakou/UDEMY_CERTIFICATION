@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajout d'un Film</title>
+</head>
+<body>
+    <h1>Formulaire d'ajout d'un nouveau Film</h1>
+    <form th:action="@{/movie}" method="post" th:object="${movieForm}">
+        <p>Titre du Film : <input type="text" th:field="*{titre}"/></p>
+        <div th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></div>
+        <p>Genre du Film :
+            <select th:field="*{genre}">
+                <option th:value="COMEDIE" th:text="Comédie"></option>
+                <option th:value="HORREUR" th:text="Horreur"></option>
+                <option th:value="THRILLER" th:text="Thriller"></option>
+                <option th:value="ACTION" th:text="Action"></option>
+                <option th:value="ROMANTIQUE" th:text="Romantique"></option>
+                <option th:value="DRAME" th:text="Drame"></option>
+                <option th:value="ANIMATION" th:text="Animation"></option>
+            </select>
+        </p>
+        <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+        <p>Description du Film : <textarea th:field="*{description}"></textarea></p>
+        <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        <input type="submit" value="VALIDER" />
+    </form>
+</body>
+</html>
