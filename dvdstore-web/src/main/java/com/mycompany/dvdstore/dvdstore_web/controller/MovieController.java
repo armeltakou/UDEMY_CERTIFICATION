@@ -5,6 +5,7 @@ import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.service.MovieServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Scanner;
 
@@ -22,7 +23,9 @@ public class MovieController implements MovieControllerInterface {
         this.movieService = movieService;
     }
 
-    public void addMovie(){
+    @PostMapping("")
+    public String addMovie(){
+        /*
         Scanner scan = new Scanner(System.in);
         System.out.println("Veuillez entrer l'identifiant du film : ");
         long id = scan.nextLong();
@@ -36,6 +39,8 @@ public class MovieController implements MovieControllerInterface {
         //DefaultMovieService movieService = new DefaultMovieService();
         //movieService.registerMovie(movie);
         movieService.registerGoLiveMovie(movie);
+        */
+        return "movie-added";
     }
 
 }

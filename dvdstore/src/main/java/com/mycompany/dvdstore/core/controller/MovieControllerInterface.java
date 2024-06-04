@@ -1,5 +1,5 @@
 package com.mycompany.dvdstore.core.controller;
 
 public interface MovieControllerInterface {
-    void addMovie();
+    String addMovie();
 }
