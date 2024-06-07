@@ -22,9 +22,10 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
         this.movieRepository = movieRepository;
     }
 
-    public void addMovie(Movie movie){
+    public Movie addMovie(Movie movie){
         movies.add(movie);
         System.out.println("The movie "+movie.getTitre()+" and "+movie.getGenre()+" has been added.");
+        return movie;
     }
 
     @Override

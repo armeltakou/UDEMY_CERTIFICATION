@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Formulaire d'ajout d'un nouveau Film</h1>
-    <form th:action="@{/movie}" method="post" th:object="${movieForm}">
+    <form th:action="@{/movie/add}" method="post" th:object="${movieForm}">
         <p>Titre du Film : <input type="text" th:field="*{titre}"/></p>
         <div th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></div>
         <p>Genre du Film :

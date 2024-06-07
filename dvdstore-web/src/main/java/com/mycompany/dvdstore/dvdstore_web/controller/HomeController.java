@@ -5,7 +5,6 @@ import com.mycompany.dvdstore.core.service.MovieServiceInterface;
 import com.mycompany.dvdstore.dvdstore_web.form.MovieForm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -25,19 +24,21 @@ public class HomeController {
         return mv;
     }
 
+    /*
     @GetMapping("/{id}")
     public ModelAndView displayMovieCard(@PathVariable("id") long id){
         ModelAndView mv = new ModelAndView("movie-details");
         mv.addObject("movie", movieService.getMovieById(id));
         return mv;
     }
+    */
 
     @GetMapping("/add-movie-form")
     public String displayMovieForm(@ModelAttribute MovieForm movie){
         return "add-movie-form";
     }
 
-    @PostMapping("")
+    @PostMapping("/add")
     public String addMovie(@Valid @ModelAttribute MovieForm movieForm, BindingResult results){
         if(results.hasErrors())
             return "add-movie-form";
