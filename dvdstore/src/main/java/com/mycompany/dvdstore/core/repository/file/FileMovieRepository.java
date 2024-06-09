@@ -1,21 +1,27 @@
 package com.mycompany.dvdstore.core.repository.file;
 
+import com.mycompany.dvdstore.core.entity.Actor;
 import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.repository.MovieRepositoryInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
-@Repository
+//@Repository
 public class FileMovieRepository implements MovieRepositoryInterface {
 
     @Value("${movie.file.location}")
     private File file;
 
     private static List<Movie> movies = new ArrayList<>();
+
+    @Autowired
     private MovieRepositoryInterface movieRepositoryInterface;
 
     public MovieRepositoryInterface getMovieRepositoryInterface() {
@@ -26,13 +32,13 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         this.movieRepositoryInterface = movieRepositoryInterface;
     }
 
-    public Movie addMovie(Movie movie){
+    public Movie save(Movie movie){
         FileWriter writer;
-        long lastId=list().stream().map(Movie::getId).max(Long::compare).orElse(0L);
-        movie.setId(lastId+1);
+        long lastId= StreamSupport.stream(findAll().spliterator(), false).map(Movie::getId_movie).max(Long::compare).orElse(0L);
+        movie.setId_movie(lastId+1);
         try{
             writer=new FileWriter(file,true);
-            writer.write(movie.getId()+"; "+movie.getTitre()+"; "+movie.getGenre()+"; "+movie.getDescription()+"\n");
+            writer.write(movie.getId_movie()+"; "+movie.getTitre()+"; "+movie.getGenre()+"; "+movie.getDescription()+"\n");
             writer.close();
         }
         catch (IOException e){
@@ -41,26 +47,34 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         return movie;
     }
 
-    public File getFile() {
-        return file;
-    }
+    public File getFile() {return file;}
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setFile(File file) {this.file = file;}
+
+    @Override
+    public <S extends Movie> Iterable<S> saveAll(Iterable<S> entities) {throw new UnsupportedOperationException();}
+
+    @Override
+    public Optional<Movie> findById(Long aLong) {
+        return Optional.empty();
     }
 
     @Override
-    public List<Movie> list(){
+    public boolean existsById(Long aLong) {throw new UnsupportedOperationException();}
+
+    @Override
+    public List<Movie> findAll(){
         List<Movie> movies=new ArrayList<>();
 
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             for(String line; (line = br.readLine()) != null; ) {
                 final Movie movie=new Movie();
                 final String[] val = line.split("\\;");
-                movie.setId(Long.parseLong(val[0]));
+                movie.setId_movie(Long.parseLong(val[0]));
                 movie.setTitre(val[1]);
                 movie.setGenre(val[2]);
                 movie.setDescription(val[3]);
+                movie.setActor(new Actor());
                 movies.add(movie);
             }
         } catch (FileNotFoundException e) {
@@ -72,9 +86,27 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     }
 
     @Override
-    public Movie getById(long id) {
+    public Iterable<Movie> findAllById(Iterable<Long> longs) {throw new UnsupportedOperationException();}
+
+    @Override
+    public long count() {throw new UnsupportedOperationException();}
+
+    @Override
+    public void deleteById(Long aLong) {throw new UnsupportedOperationException();}
+
+    @Override
+    public void delete(Movie entity) {throw new UnsupportedOperationException();}
+
+    @Override
+    public void deleteAll(Iterable<? extends Movie> entities) {throw new UnsupportedOperationException();}
+
+    @Override
+    public void deleteAll() {throw new UnsupportedOperationException();}
+
+    @Override
+    public Optional<Movie> findById(long id) {
         final Movie movie = new Movie();
-        movie.setId(id);
+        movie.setId_movie(id);
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             for(String line; (line = br.readLine()) != null; ) {
 
@@ -84,7 +116,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
                     movie.setTitre(allProperties[1]);
                     movie.setGenre(allProperties[2]);
                     movie.setDescription(allProperties[3]);
-                    return movie;
+                    return Optional.of(movie);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -98,6 +130,6 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         //movie.setTitre("UNKNOWN");
         //movie.setGenre("UNKNOWN");
         //movie.setDescription("UNKNOWN");
-        return movie;
+        return Optional.of(movie);
     }
 }

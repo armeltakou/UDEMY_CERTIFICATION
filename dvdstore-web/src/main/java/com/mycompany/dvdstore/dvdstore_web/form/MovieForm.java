@@ -1,5 +1,5 @@
 package com.mycompany.dvdstore.dvdstore_web.form;
-
+/*
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -50,3 +50,4 @@ public class MovieForm {
 
     public void setDescription(String description) {this.description = description;}
 }
+*/

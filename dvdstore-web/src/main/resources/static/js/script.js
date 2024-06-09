@@ -25,7 +25,7 @@ fetch('../movie')
             tr.appendChild(td);
 
             td = document.createElement("td");
-            text = document.createTextNode(`${movie.description}`);
+            text = document.createTextNode(`${movie.actor.firstName}`);
             td.appendChild(text);
             tr.appendChild(td);
 
@@ -33,7 +33,7 @@ fetch('../movie')
             var button = document.createElement("button");
             button.setAttribute("type","button");
             button.onclick = function() {
-                showDetail(`${movie.id}`);
+                showDetail(`${movie.id_movie}`);
             };
             text = document.createTextNode("Details");
             button.appendChild(text);
@@ -53,17 +53,29 @@ function showDetail(movieId){
         movieDetailNode.innerHTML = "";
 
         var p = document.createElement("p");
-        var text = document.createTextNode(`Titre: ${res.titre}`);
+        var text = document.createTextNode(`Titre : ${res.titre}`);
         p.appendChild(text);
         movieDetailNode.appendChild(p);
 
         p = document.createElement("p");
-        text = document.createTextNode(`Genre: ${res.genre}`);
+        text = document.createTextNode(`Genre : ${res.genre}`);
         p.appendChild(text);
         movieDetailNode.appendChild(p);
 
         p = document.createElement("p");
-        text = document.createTextNode(`Description: ${res.description}`);
+        text = document.createTextNode(`Description : ${res.description}`);
+        p.appendChild(text);
+        movieDetailNode.appendChild(p);
+
+        p = document.createElement("p");
+        text = document.createTextNode(`Acteur : ${res.actor.firstName} ${res.actor.lastName}`);
+        p.appendChild(text);
+        movieDetailNode.appendChild(p);
+
+        p = document.createElement("p");
+        var sum = res.reviews.map((a) => a.mark).reduce((a, b) => a + b, 0);
+        var avg = (sum / res.reviews.length) || 0;
+        text = document.createTextNode(`Mark: ${avg}/5`);
         p.appendChild(text);
         movieDetailNode.appendChild(p);
 
