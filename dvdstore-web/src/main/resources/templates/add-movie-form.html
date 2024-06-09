@@ -9,6 +9,7 @@
     <form th:action="@{/movie/add}" method="post" th:object="${movieForm}">
         <p>Titre du Film : <input type="text" th:field="*{titre}"/></p>
         <div th:if="${#fields.hasErrors('titre')}" th:errors="*{titre}"></div>
+
         <p>Genre du Film :
             <select th:field="*{genre}">
                 <option th:value="COMEDIE" th:text="Comédie"></option>
@@ -21,8 +22,16 @@
             </select>
         </p>
         <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>
+
         <p>Description du Film : <textarea th:field="*{description}"></textarea></p>
         <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+
+        <p>Nom de l'acteur : <input type="text" th:field="*{firstName}"/></p>
+        <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+
+        <p>Prénom de l'acteur : <input type="text" th:field="*{lastName}"/></p>
+        <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+
         <input type="submit" value="VALIDER" />
     </form>
 </body>

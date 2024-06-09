@@ -1,7 +1,9 @@
 package com.mycompany.dvdstore.dvdstore_web.controller;
 
+import com.mycompany.dvdstore.core.entity.Actor;
 import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.service.MovieServiceInterface;
+import com.mycompany.dvdstore.dvdstore_web.form.MovieForm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,19 +35,23 @@ public class HomeController {
     */
 
     @GetMapping("/add-movie-form")
-    public String displayMovieForm(@ModelAttribute Movie movie){
+    public String displayMovieForm(@ModelAttribute MovieForm movie){
         return "add-movie-form";
     }
 
     @PostMapping("/add")
-    public String addMovie(@Valid @ModelAttribute Movie movieForm, BindingResult results){
+    public String addMovie(@Valid @ModelAttribute MovieForm movieForm, BindingResult results){
         if(results.hasErrors())
             return "add-movie-form";
         Movie movie = new Movie();
-        movie.setId_movie(movieForm.getId_movie());
+        Actor actor = new Actor(movieForm.getFirstName(), movieForm.getLastName());
+
+        movie.setActor(actor);
+        movie.setId_movie(movieForm.getId());
         movie.setTitre(movieForm.getTitre());
         movie.setGenre(movieForm.getGenre());
         movie.setDescription(movieForm.getDescription());
+
         movieService.registerMovie(movie);
         return "movie-added";
     }
