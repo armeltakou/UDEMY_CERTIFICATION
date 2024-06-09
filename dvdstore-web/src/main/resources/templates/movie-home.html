@@ -20,29 +20,6 @@
             </article>
         </div>
     </section>
-    <!--table border="2">
-        <caption>
-            Liste des Films de ma collection DVDStore
-        </caption>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Titre</th>
-            <th>Genre</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="movie: ${movies}">
-            <td th:text="${movie.id}">Id</td>
-            <td>
-                <a th:href="@{/movie/{id}(id=${movie.id})}" th:text="${movie.titre}"/>
-            </td>
-            <td th:text="${movie.genre}">genre</td>
-            <td th:text="${movie.description}">description</td>
-        </tr>
-        </tbody>
-    </table-->
 <script th:src="@{/js/script.js}"></script>
 </body>
 </html>

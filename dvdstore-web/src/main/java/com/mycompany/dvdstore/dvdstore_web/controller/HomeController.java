@@ -2,7 +2,6 @@ package com.mycompany.dvdstore.dvdstore_web.controller;
 
 import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.service.MovieServiceInterface;
-import com.mycompany.dvdstore.dvdstore_web.form.MovieForm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,25 +24,25 @@ public class HomeController {
     }
 
     /*
-    @GetMapping("/{id}")
-    public ModelAndView displayMovieCard(@PathVariable("id") long id){
+    @GetMapping("/{id_movie}")
+    public ModelAndView displayMovieCard(@PathVariable("id_movie") long id_movie){
         ModelAndView mv = new ModelAndView("movie-details");
-        mv.addObject("movie", movieService.getMovieById(id));
+        mv.addObject("movie", movieService.getMovieById(id_movie));
         return mv;
     }
     */
 
     @GetMapping("/add-movie-form")
-    public String displayMovieForm(@ModelAttribute MovieForm movie){
+    public String displayMovieForm(@ModelAttribute Movie movie){
         return "add-movie-form";
     }
 
     @PostMapping("/add")
-    public String addMovie(@Valid @ModelAttribute MovieForm movieForm, BindingResult results){
+    public String addMovie(@Valid @ModelAttribute Movie movieForm, BindingResult results){
         if(results.hasErrors())
             return "add-movie-form";
         Movie movie = new Movie();
-        movie.setId(movieForm.getId());
+        movie.setId_movie(movieForm.getId_movie());
         movie.setTitre(movieForm.getTitre());
         movie.setGenre(movieForm.getGenre());
         movie.setDescription(movieForm.getDescription());
