@@ -1,7 +1,5 @@
 package com.mycompany.dvdstore.dvdstore_web.form;
 
-import com.mycompany.dvdstore.core.entity.Actor;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

@@ -1,4 +1,3 @@
-DELETE FROM MOVIE_SEC_ACTORS;
 DELETE FROM REVIEW;
 DELETE FROM APP_USER;
 DELETE FROM MOVIE;
@@ -13,14 +12,6 @@ INSERT INTO MOVIE (TITRE,GENRE,DESCRIPTION,ID_MAIN_ACTOR) VALUES
   ('Rasta Rocket','COMEDIE',"Comment une équipe de la Jamaïque, après de multiples aventures, va participer à l'épreuve de bobsleigh à quatre aux Jeux Olympiques d'hiver de Calgary.",(select ID_ACTOR from ACTOR where FIRST_NAME="Leon")),
   ('Braveheart','DRAME',"Edouard Ier, roi d'Angleterre, s'empare du trône après avoir réglé un conflit avec le personnage fantoche qu'il y avait auparavant placé. William Wallace prend la tête d'une révolte paysanne.",(select ID_ACTOR from ACTOR where FIRST_NAME="Mel")),
   ('Moonraker','THRILLER',"L'agent secret britannique James Bond enquête sur la disparition d'une navette spatiale americaine, Moonraker, confiee au gouvernement britannique. 007 se rend aux Etats-Unis pour interroger le responsable de la construction de la navette, Sir Hugo Drax.",(select ID_ACTOR from ACTOR where FIRST_NAME="Roger"));
-
-
-INSERT INTO MOVIE_SEC_ACTORS(ID_MOVIE, ID_ACTOR) VALUES ((select ID_MOVIE from MOVIE where TITRE="Toys Story 3"),(select ID_ACTOR from ACTOR where FIRST_NAME="Woody")),
-  ((select ID_MOVIE from MOVIE where TITRE="Toys Story 3"),(select ID_ACTOR from ACTOR where FIRST_NAME="Jessie")),
-  ((select ID_MOVIE from MOVIE where TITRE="Rasta Rocket"),(select ID_ACTOR from ACTOR where FIRST_NAME="John")),
-  ((select ID_MOVIE from MOVIE where TITRE="Rasta Rocket"),(select ID_ACTOR from ACTOR where FIRST_NAME="Malik")),
-  ((select ID_MOVIE from MOVIE where TITRE="Braveheart"),(select ID_ACTOR from ACTOR where FIRST_NAME="Sophie")),
-  ((select ID_MOVIE from MOVIE where TITRE="Moonraker"),(select ID_ACTOR from ACTOR where FIRST_NAME="Michael"));
 
 INSERT INTO APP_USER (USERNAME) VALUES ('John Doe'),('Tom Pike'),('Elton James'),('Bobby Wing');
 

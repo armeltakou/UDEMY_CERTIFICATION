@@ -1,0 +1,1 @@
+INSERT INTO APP_USER (USERNAME) VALUES ('John Doe'),('Tom Pike'),('Elton James'),('Bobby Wing');
