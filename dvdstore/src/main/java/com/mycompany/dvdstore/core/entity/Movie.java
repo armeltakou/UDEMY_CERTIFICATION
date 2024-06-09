@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedEntityGraph(name = "movie.actor-and-reviews", attributeNodes = {@NamedAttributeNode("actor"), @NamedAttributeNode("reviews")})
 public class Movie {
 
     @Id
@@ -20,7 +21,7 @@ public class Movie {
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_MAIN_ACTOR")
     private Actor actor;
 

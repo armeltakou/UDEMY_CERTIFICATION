@@ -5,6 +5,7 @@ import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.io.*;
@@ -62,6 +63,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
     @Override
     public boolean existsById(Long aLong) {throw new UnsupportedOperationException();}
 
+    @Query("SELECT movie FROM Movie movie INNER JOIN FETCH movie.actor")
     @Override
     public List<Movie> findAll(){
         List<Movie> movies=new ArrayList<>();

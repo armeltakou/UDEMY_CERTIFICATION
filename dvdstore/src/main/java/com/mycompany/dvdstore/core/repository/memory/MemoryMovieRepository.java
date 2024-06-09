@@ -3,6 +3,7 @@ package com.mycompany.dvdstore.core.repository.memory;
 import com.mycompany.dvdstore.core.entity.Movie;
 import com.mycompany.dvdstore.core.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class MemoryMovieRepository implements MovieRepositoryInterface {
     @Override
     public boolean existsById(Long aLong) {throw new UnsupportedOperationException();}
 
+    @Query("SELECT movie FROM Movie movie INNER JOIN FETCH movie.actor")
     @Override
     public Iterable<Movie> findAll() {throw new UnsupportedOperationException();}
 
